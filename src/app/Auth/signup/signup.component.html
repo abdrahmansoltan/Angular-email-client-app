@@ -1,1 +1,39 @@
+<h3>Create an Account</h3>
+<form
+  class="ui form"
+  [formGroup]="authForm"
+  (ngSubmit)="onSubmit()"
+>
+  <div class="field">
+    <label>Username</label>
+    <input
+      type="text"
+      formControlName="username"
+      placeholder="Username"
+    >
+  </div>
 <p>signup works!</p>
+  <div class="field">
+    <label>Password</label>
+    <input
+      type="password"
+      formControlName="password"
+      placeholder="Password"
+    >
+  </div>
+  <div class="field">
+    <label>password Confirmation</label>
+    <input
+      type="password"
+      formControlName="passwordConfirmation"
+      placeholder="Password Confirmation"
+    >
+  </div>
+  <button
+    class="ui button submit primary"
+    type="submit"
+    [disabled]="!authForm.valid"
+  >
+    Submit
+  </button>
+</form>
