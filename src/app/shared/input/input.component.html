@@ -1,1 +1,30 @@
-<p>input works!</p>
+<div class="field mb-1">
+  <label>{{label}}</label>
+  <input
+    [type]="type"
+    [placeholder]="placeholder"
+    [formControl]="control"
+  >
+  <div
+    class="ui red pointing label basic"
+    *ngIf="showErrors()"
+  >
+    <p *ngIf="control.hasError('required')">
+      This field is required
+    </p>
+    <p *ngIf="control.hasError('minlength')">
+      This field must be at least {{control.errors && control.errors['minlength'].requiredLength}} characters
+    </p>
+    <p *ngIf="control.hasError('maxlength')">
+      This field must be no more than {{control.errors && control.errors['maxlength'].requiredLength}} characters
+    </p>
+    <p *ngIf="control.hasError('pattern')">
+      Invalid format
+    </p>
+    <p *ngIf="control.hasError('nonUniqueUsername')">
+      This username is already taken
+    </p>
+    <p *ngIf="control.hasError('noConnection')">
+      Could not connect to server to check username availability
+  </div>
+</div>

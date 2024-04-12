@@ -4,36 +4,48 @@
   [formGroup]="authForm"
   (ngSubmit)="onSubmit()"
 >
-  <div class="field">
-    <label>Username</label>
-    <input
-      type="text"
-      formControlName="username"
-      placeholder="Username"
-    >
-  </div>
-<p>signup works!</p>
-  <div class="field">
-    <label>Password</label>
-    <input
-      type="password"
-      formControlName="password"
-      placeholder="Password"
-    >
-  </div>
-  <div class="field">
-    <label>password Confirmation</label>
-    <input
-      type="password"
-      formControlName="passwordConfirmation"
-      placeholder="Password Confirmation"
-    >
-  </div>
-  <button
-    class="ui button submit primary"
-    type="submit"
-    [disabled]="!authForm.valid"
+  <app-input
+    label="Username"
+    placeholder="Username"
+    type="text"
+    [control]="authForm.controls.username"
+  ></app-input>
+
+  <app-input
+    label="Password"
+    placeholder="Password"
+    type="password"
+    [control]="authForm.controls.password"
+  ></app-input>
+
+  <app-input
+    label="Password Confirmation"
+    placeholder="Password Confirmation"
+    type="password"
+    [control]="authForm.controls.passwordConfirmation"
+  ></app-input>
+
+  <div
+    *ngIf="
+      authForm.get('password')?.touched &&
+      authForm.get('passwordConfirmation')?.touched &&
+      authForm.errors
+    "
+    class="ui red label basic"
   >
-    Submit
-  </button>
+    <p *ngIf="authForm.hasError('passwordsDontMatch')">
+      Password and Password Confirmation must match
+    </p>
+  </div>
+
+  <div>
+    <button
+      class="ui button submit primary"
+      type="submit"
+      [disabled]="!authForm.valid"
+    >
+      Submit
+    </button>
+  </div>
+  {{authForm.errors | json}}
 </form>
