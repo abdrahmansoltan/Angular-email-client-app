@@ -6,6 +6,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService, SignupCredentials } from '../auth.service';
 import { MatchPassword } from '../validators/match-password';
 import { UniqueUsername } from '../validators/unique-username';
@@ -46,7 +47,8 @@ export class SignupComponent {
     // inject the validators
     private matchPassword: MatchPassword,
     private uniqueUsername: UniqueUsername,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   onSubmit() {
@@ -57,8 +59,8 @@ export class SignupComponent {
     const credentials = this.authForm.value as SignupCredentials;
 
     this.authService.signup(credentials).subscribe({
-      next: (response) => {
-        console.log('Response', response);
+      next: () => {
+        this.router.navigateByUrl('/inbox');
       },
       error: (err) => {
         if (!err.status) {
