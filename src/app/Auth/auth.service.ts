@@ -35,7 +35,7 @@ interface SignedinResponse {
 })
 export class AuthService {
   rootUrl = 'https://api.angular-email.com';
-  signedin$ = new BehaviorSubject(false); // BehaviorSubject is a type of Observable that stores the current value and emits it to new subscribers
+  signedin$ = new BehaviorSubject<null | boolean>(null); // BehaviorSubject is a type of Observable that stores the current value and emits it to new subscribers
 
   constructor(private http: HttpClient) {} // inject the HttpClient service
 

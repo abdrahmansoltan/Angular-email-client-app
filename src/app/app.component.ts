@@ -8,7 +8,7 @@ import { AuthService } from './Auth/auth.service';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  signedin$: BehaviorSubject<boolean>;
+  signedin$: BehaviorSubject<boolean | null>; // create a BehaviorSubject to store the signedin status
 
   constructor(private authService: AuthService) {
     this.signedin$ = this.authService.signedin$; // set the signedin$ BehaviorSubject to the signedin$ BehaviorSubject from the AuthService
