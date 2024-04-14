@@ -13,6 +13,7 @@ export interface Email {
   text: string;
   to: string;
   from: string;
+  html: string;
 }
 
 export interface EmailPayload {
