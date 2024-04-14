@@ -3,15 +3,15 @@
     class="item"
     *ngFor="let email of emails"
   >
-    <a 
+    <a
       [routerLink]="email.id"
       routerLinkActive="active"
     >
       <div class="content">
-        <div class="header">
+        <div class="header trim">
           {{ email.subject }}
         </div>
-        <p>{{ email.from }}</p>
+        <p class="trim">{{ email.from }}</p>
       </div>
     </a>
   </div>
