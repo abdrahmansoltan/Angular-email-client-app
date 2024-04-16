@@ -11,6 +11,7 @@ export class InputComponent {
   @Input() type: string = 'text';
   @Input() placeholder: string = '';
   @Input() control: FormControl = new FormControl('');
+  @Input() controlType: string = 'input';
 
   showErrors(): boolean {
     const { dirty, touched, errors } = this.control;

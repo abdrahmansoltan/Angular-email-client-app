@@ -1,1 +1,18 @@
-<p>email-create works!</p>
+<button
+  class="ui button inverted primary fluid"
+  (click)="onComposeClick()"
+>
+  Compose
+</button>
+
+<app-modal
+  *ngIf="showModal"
+  (dismiss)="onDismissClick()"
+>
+  <div modalTitle>Compose</div>
+  <app-email-form
+    [email]="email"
+    (send)="onSendClick($event)"
+    (dismiss)="onDismissClick()"
+  ></app-email-form>
+</app-modal>

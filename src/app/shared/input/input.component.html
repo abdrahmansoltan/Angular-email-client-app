@@ -1,16 +1,28 @@
 <div class="field mb-1">
+  <!-- Inputs -->
   <label>{{label}}</label>
   <input
+    *ngIf="controlType === 'input'"
     [type]="type"
     [placeholder]="placeholder"
     [formControl]="control"
   >
+  <textarea
+    *ngIf="controlType === 'textarea'"
+    [placeholder]="placeholder"
+    [formControl]="control"
+  ></textarea>
+
+  <!-- Error messages -->
   <div
     class="ui red pointing label basic"
     *ngIf="showErrors()"
   >
     <p *ngIf="control.hasError('required')">
       This field is required
+    </p>
+    <p *ngIf="control.hasError('email')">
+      Please enter a valid email address
     </p>
     <p *ngIf="control.hasError('minlength')">
       This field must be at least {{control.errors && control.errors['minlength'].requiredLength}} characters
