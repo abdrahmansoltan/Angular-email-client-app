@@ -36,6 +36,7 @@ interface SignedinResponse {
 export class AuthService {
   rootUrl = 'https://api.angular-email.com';
   signedin$ = new BehaviorSubject<null | boolean>(null); // BehaviorSubject is a type of Observable that stores the current value and emits it to new subscribers
+  username = '';
 
   constructor(private http: HttpClient) {} // inject the HttpClient service
 
@@ -52,8 +53,9 @@ export class AuthService {
     return this.http
       .post<SignupResponse>(`${this.rootUrl}/auth/signup`, credentials)
       .pipe(
-        tap(() => {
+        tap((res) => {
           this.signedin$.next(true); // emit a new value to all subscribers that the user is signed in
+          this.username = res.username;
         })
       );
   }
@@ -62,8 +64,9 @@ export class AuthService {
     return this.http
       .post<SigninResponse>(`${this.rootUrl}/auth/signin`, credentials)
       .pipe(
-        tap(() => {
+        tap((res) => {
           this.signedin$.next(true);
+          this.username = res.username;
         })
       );
   }
@@ -72,8 +75,9 @@ export class AuthService {
     return this.http
       .get<SignedinResponse>(`${this.rootUrl}/auth/signedin`)
       .pipe(
-        tap(({ authenticated }) => {
+        tap(({ authenticated, username }) => {
           this.signedin$.next(authenticated);
+          this.username = username;
         })
       );
   }
