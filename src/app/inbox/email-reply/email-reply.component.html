@@ -1,1 +1,18 @@
-<p>email-reply works!</p>
+<button
+  class="ui button primary"
+  (click)="onComposeClick()"
+>
+  Reply
+</button>
+
+<app-modal
+  *ngIf="showModal"
+  (dismiss)="onDismissClick()"
+>
+  <div modalTitle>Reply</div>
+  <app-email-form
+    [email]="email"
+    (send)="onSendClick($event)"
+    (dismiss)="onDismissClick()"
+  ></app-email-form>
+</app-modal>
