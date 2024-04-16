@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../Auth/auth.service';
+import { Email, EmailPayload } from '../email';
+import { EmailService } from '../email.service';
 
 @Component({
   selector: 'app-email-create',
@@ -12,6 +14,7 @@ export class EmailCreateComponent {
 
   constructor(
     private authService: AuthService,
+    private emailService: EmailService
   ) {}
 
   ngOnInit() {
@@ -31,5 +34,11 @@ export class EmailCreateComponent {
 
   onDismissClick() {
     this.showModal = false;
+  }
+
+  onSendClick(payload: EmailPayload) {
+    this.emailService.sendEmail(payload).subscribe(() => {
+      this.showModal = false;
+    });
   }
 }
